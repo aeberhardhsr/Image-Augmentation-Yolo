@@ -23,6 +23,9 @@ The script scales up to the highest amount of cores you have on your machine. If
 
 ## Usage ##
 **Step 1:** Load the labeled dataset (images and labels) in the `img_raw` folder
+
 **Step 2:** Determine the batch size of images and labels in `augmentation.py` on line `32` and `37`
+
 **Step 3:** I assumed your images are in `.jpg` and labels are in `.txt`, if not, then change the lines `42`, `46`, `64`, `68`
+
 **Step 4:** run the script with `python augmentation.py`
