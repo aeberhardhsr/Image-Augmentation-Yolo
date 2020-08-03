@@ -30,12 +30,12 @@ export_folder = "img_aug"
 # set amount of max images per augmentation batch
 # max_batch_amount_images can be as high as possible, only restriction is the result from all images in img_raw divided by max_batch_amount_images must be an integer
 # the program will break if (amount of images in img_raw)/max_batch_amount_images is not an integer
-max_batch_amount_images = 1
+max_batch_amount_images = 10
 
 # set amount of max labels per renaming batch
 # max_batch_amount_labels can be as high as possible, only restriction is the result from all labels in img_raw divided by max_batch_amount_labels must be an integer
 # the program will break if (amount of images in img_raw)/max_batch_amount_labels is not an integer
-max_batch_amount_labels = 1
+max_batch_amount_labels = 10
 
 # File extension for augmented images
 # can be adjusted, depends on the source filetype
@@ -271,7 +271,7 @@ if __name__ == '__main__':
     else:
         print("[ERROR]  Please choose another value for max_batch_amount")
         print("[ERROR]  Division result from img_raw/max_batch_amount must be evenly")
-        print("[INFO]   Please recalculate the correct max_batch_amount and edit line 32")
+        print("[INFO]   Please recalculate the correct max_batch_amount and edit line 33")
 
 
 
@@ -320,8 +320,8 @@ if __name__ == '__main__':
     else:
         print("[ERROR]  Please choose another value for max_batch_amount_labels")
         print("[ERROR]  Division result from img_raw/max_batch_amount_labels must be evenly")
-        print("[INFO]   Please recalculate the correct max_batch_amount_labels and edit line 37")
+        print("[INFO]   Please recalculate the correct max_batch_amount_labels and edit line 38")
 
 
     time_elapsed = datetime.now() - start_time
-    print("Die Augmentation dauerte (h:mm:ss.ms) {}".format(time_elapsed))
+    print("The augmentation process lasts (h:mm:ss.ms) {}".format(time_elapsed))
