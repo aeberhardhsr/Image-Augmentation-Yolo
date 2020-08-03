@@ -17,6 +17,7 @@ The script provides eleven augmentation modes. Following image manipulation type
 - Normal
 
 The script scales up to the highest amount of cores you have on your machine. If you don't have enough memory on your machine, dont' worrry. You can augment the dataset in batches, which are fully customizable in their size.
+In the `img_aug` folder are some samples of the augmentation types.
 
 ## Prerequisites
 ```pip install pillow```
