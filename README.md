@@ -16,7 +16,7 @@ The script provides eleven augmentation modes. Following image manipulation type
 - Watermark with a Swiss flag
 - Normal
 
-The script scales up to the highest amount of cores you have on your machine. If you don't have enough memory on your machine, dont' worrry. You can augment the dataset in batches, which are fully customizable in their amount.
+The script scales up to the highest amount of cores you have on your machine. If you don't have enough memory on your machine, dont' worrry. You can augment the dataset in batches, which are fully customizable in their size.
 
 ## Prerequisites
 ```pip install pillow```
