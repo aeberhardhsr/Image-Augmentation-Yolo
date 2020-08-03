@@ -30,12 +30,12 @@ export_folder = "img_aug"
 # set amount of max images per augmentation batch
 # max_batch_amount_images can be as high as possible, only restriction is the result from all images in img_raw divided by max_batch_amount_images must be an integer
 # the program will break if (amount of images in img_raw)/max_batch_amount_images is not an integer
-max_batch_amount_images = 3
+max_batch_amount_images = 1
 
 # set amount of max labels per renaming batch
 # max_batch_amount_labels can be as high as possible, only restriction is the result from all labels in img_raw divided by max_batch_amount_labels must be an integer
 # the program will break if (amount of images in img_raw)/max_batch_amount_labels is not an integer
-max_batch_amount_labels = 3
+max_batch_amount_labels = 1
 
 # File extension for augmented images
 # can be adjusted, depends on the source filetype
@@ -61,16 +61,16 @@ def loadLabels(path = middle_process_folder):
 
 # image counting function
 def count_images(dir):
-    return len(glob.glob1(dir,".jpg"))
+    return len(glob.glob1(dir,"*" + image_extension))
 
 # label counting function
 def count_labels(dir):
-    return len(glob.glob1(dir,".txt"))
+    return len(glob.glob1(dir,"*" + label_extension))
 
 # add normal image to augmented images
 def process_image_normal(img_name):
     img = Image.open(pathlib.Path(img_name))
-    img.save(export_folder + "/Normal_" + format(Path(img_name).stem)) + image_extension
+    img.save(export_folder + "/Normal_" + format(Path(img_name).stem) + image_extension)
     print("Normal Image added successfully")
 
 # add gaussian blur to an image
@@ -78,63 +78,63 @@ def process_image_gaussblur(img_name):
     img = Image.open(pathlib.Path(img_name))
     img = img.filter(ImageFilter.GaussianBlur(radius=3))
     #filename = (Path(img_name).stem)
-    img.save(export_folder + "/GaussBlur_" + format(Path(img_name).stem)) + image_extension
+    img.save(export_folder + "/GaussBlur_" + format(Path(img_name).stem) + image_extension)
     print("Gauss Filter added successfully")
 
 # add contour filter to an image
 def process_image_contour(img_name):
     img = Image.open(pathlib.Path(img_name))
     img = img.filter(ImageFilter.CONTOUR())
-    img.save(export_folder + "/Contour_" + format(Path(img_name).stem)) + image_extension
+    img.save(export_folder + "/Contour_" + format(Path(img_name).stem) + image_extension)
     print("Contour Filter added successfully")
 
 # add emboss filter to an image
 def process_image_emboss(img_name):
     img = Image.open(pathlib.Path(img_name))
     img = img.filter(ImageFilter.EMBOSS())
-    img.save(export_folder + "/Emboss_" + format(Path(img_name).stem)) + image_extension
+    img.save(export_folder + "/Emboss_" + format(Path(img_name).stem) + image_extension)
     print("Emboss Filter added successfully")
 
 # add find edges filter to an image
 def process_image_findedges(img_name):
     img = Image.open(pathlib.Path(img_name))
     img = img.filter(ImageFilter.FIND_EDGES())
-    img.save(export_folder + "/FindEdges_" + format(Path(img_name).stem)) + image_extension
+    img.save(export_folder + "/FindEdges_" + format(Path(img_name).stem) + image_extension)
     print("FindEdges Filter added successfully")
 
 # add RankFilter to an image
 def process_image_rankfilter(img_name):
     img = Image.open(pathlib.Path(img_name))
     img = img.filter(ImageFilter.RankFilter(size=9, rank=2))
-    img.save(export_folder + "/RankFilter_" + format(Path(img_name).stem)) + image_extension
+    img.save(export_folder + "/RankFilter_" + format(Path(img_name).stem) + image_extension)
     print("RankFilter added successfully")
 
 # add MaxFilter to an image
 def process_image_maxfilter(img_name):
     img = Image.open(pathlib.Path(img_name))
     img = img.filter(ImageFilter.MaxFilter(size=9))
-    img.save(export_folder + "/MaxFilter_" + format(Path(img_name).stem)) + image_extension
+    img.save(export_folder + "/MaxFilter_" + format(Path(img_name).stem) + image_extension)
     print("MaxFilter added successfully")
 
 # add MinFilter to an image
 def process_image_minfilter(img_name):
     img = Image.open(pathlib.Path(img_name))
     img = img.filter(ImageFilter.MinFilter(size=9))
-    img.save(export_folder + "/MinFilter_" + format(Path(img_name).stem)) + image_extension
+    img.save(export_folder + "/MinFilter_" + format(Path(img_name).stem) + image_extension)
     print("MinFilter added successfully")
 
 # add MedianFilter to an image
 def process_image_medianfilter(img_name):
     img = Image.open(pathlib.Path(img_name))
     img = img.filter(ImageFilter.MedianFilter(size=9))
-    img.save(export_folder + "/MedianFilter_" + format(Path(img_name).stem)) + image_extension
+    img.save(export_folder + "/MedianFilter_" + format(Path(img_name).stem) + image_extension)
     print("MedianFilter added successfully")
 
 # add ModeFilter to an image
 def process_image_modefilter(img_name):
     img = Image.open(pathlib.Path(img_name))
     img = img.filter(ImageFilter.ModeFilter(size=3))
-    img.save(export_folder + "/ModeFilter_" + format(Path(img_name).stem)) + image_extension
+    img.save(export_folder + "/ModeFilter_" + format(Path(img_name).stem) + image_extension)
     print("ModeFilter added successfully")
 
 # add an image as watermark to an image
@@ -144,7 +144,7 @@ def process_image_watermark(img_name):
     positionwatermarkx = random.randint(0, 700)
     positionwatermarky = random.randint(0, 400)
     img.paste(watermark_img, (positionwatermarkx, positionwatermarky), watermark_img)
-    img.save(export_folder + "/Watermark_" + format(Path(img_name).stem)) + image_extension
+    img.save(export_folder + "/Watermark_" + format(Path(img_name).stem) + image_extension)
     print("Watermark added successfully")
 
 # rename source label to normal label
@@ -229,12 +229,10 @@ if __name__ == '__main__':
 
     # the result from img_raw divided by max_batch must be an integer! 
     if count_images(list_of_files) % max_batch_amount_images == 0:
-        print(count_images(list_of_files))
         # loop over all files in directory
         for files in os.listdir(list_of_files):
             if count_images(list_of_files) > 0:
                 if files.endswith(image_extension):
-                    #print(files)
                     # move only an amount of batch size of images to the process folder
                     
                     while i < (max_batch_amount_images):
@@ -249,7 +247,7 @@ if __name__ == '__main__':
                     filenames_image = loadImages()
                     for file_images in filenames_image:
                         img_names.append(file_images)
-                    print(img_names)
+
                     # start the multithreading augmentation process
                     with concurrent.futures.ProcessPoolExecutor() as executor:
                         executor.map(process_image_normal, img_names)
@@ -278,12 +276,12 @@ if __name__ == '__main__':
 
 
     if count_labels(list_of_files) % max_batch_amount_labels == 0:
-        print(count_labels(list_of_files))
+
         # loop over all files in directory
         for files in os.listdir(list_of_files):
             if count_labels(list_of_files) > 0:
                 if files.endswith(label_extension):
-                    #print(files)
+
                     # move only an amount of batch size of labels to the process folder
                     
                     while i < (max_batch_amount_labels):
@@ -327,4 +325,3 @@ if __name__ == '__main__':
 
     time_elapsed = datetime.now() - start_time
     print("Die Augmentation dauerte (h:mm:ss.ms) {}".format(time_elapsed))
-
